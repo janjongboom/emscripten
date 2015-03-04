@@ -2969,6 +2969,9 @@ LibraryManager.library = {
 
   mmap__deps: ['$FS', 'memset'],
   mmap: function(start, num, prot, flags, fd, offset) {
+    return 0xbed000; // works
+    return 0x100bed000; // not works
+
     /* FIXME: Since mmap is normally implemented at the kernel level,
      * this implementation simply uses malloc underneath the call to
      * mmap.
@@ -2998,6 +3001,7 @@ LibraryManager.library = {
     }
 
     _mmap.mappings[ptr] = { malloc: ptr, num: num, allocated: allocated };
+    // return 0x100bed000;
     return ptr;
   },
 
